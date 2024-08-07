@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="enter city name">
+            <button><img src="images/search.png"></button>
+        </div>
+        <div class="error">
+            <p>Invalid city name</p>
+        </div>
+        <div class="weather">
+            <img src="icons/01d.png" class="weather-icon">
+            <h1 class="temp">22°c</h1>
+            <h2 class="city">bengaluru</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png">
+                    <div>
+                        <p class="wind">50 km/hr</p>
+                        <p>Wind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    const apiKey = "be160303a09e19a8bba3db0d07d86349";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric";
+
+    const searchCity = document.querySelector(".search input");
+    const searchBtn =  document.querySelector(".search button");
+    const icon = document.querySelector(".weather-icon");
+
+    async function checkWeather(city) {
+        const response = await fetch(apiUrl + `&q=${city}` + `&appid=${apiKey}`);
+
+        if(response.status == 404){
+            document.querySelector(".error").style.display = "block";
+            document.querySelector(".weather").style.display = "none";
+        }
+        else{
+            var data = await response.json();
+
+            console.log(data);
+
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/hr";
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+
+            if(data.weather[0].icon == "01d"){
+                icon.src = "icons/01d.png";
+            }
+            else if(data.weather[0].icon == "01n"){
+                icon.src = "icons/01n.png";
+            }
+            else if(data.weather[0].icon == "02n"){
+                icon.src = "icons/02n.png";
+            }
+            else if(data.weather[0].icon == "02d"){
+                icon.src = "icons/02d.png";
+            }
+            else if(data.weather[0].icon == "03n"){
+                icon.src = "icons/03n.png";
+            }
+            else if(data.weather[0].icon == "03d"){
+                icon.src = "icons/03d.png";
+            }
+            else if(data.weather[0].icon == "04n"){
+                icon.src = "icons/04n.png";
+            }
+            else if(data.weather[0].icon == "04d"){
+                icon.src = "icons/04d.png";
+            }
+            else if(data.weather[0].icon == "09n"){
+                icon.src = "icons/09n.png";
+            }
+            else if(data.weather[0].icon == "09d"){
+                icon.src = "icons/09d.png";
+            }
+            else if(data.weather[0].icon == "10n"){
+                icon.src = "icons/10n.png";
+            }
+            else if(data.weather[0].icon == "10d"){
+                icon.src = "icons/10d.png";
+            }
+            else if(data.weather[0].icon == "11n"){
+                icon.src = "icons/11n.png";
+            }
+            else if(data.weather[0].icon == "11d"){
+                icon.src = "icons/11d.png";
+            }
+            else if(data.weather[0].icon == "13n"){
+                icon.src = "icons/13n.png";
+            }
+            else if(data.weather[0].icon == "13d"){
+                icon.src = "icons/13d.png";
+            }
+            else if(data.weather[0].icon == "50n"){
+                icon.src = "icons/50n.png";
+            }
+            else if(data.weather[0].icon == "50d"){
+                icon.src = "icons/50d.png";
+            }
+
+
+            document.querySelector(".weather").style.display = "block";
+            document.querySelector(".error").style.display = "none";
+        }
+        
+    }
+
+    searchBtn.addEventListener("click", ()=>{
+        checkWeather(searchCity.value);
+    })
+    
+
+</script>
+</body>
+</html>
