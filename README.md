@@ -3,7 +3,7 @@
 # Overview
 It's a weather application that displays the current weather of various cities, including temperature, humidity, and wind speed.
 
-# Front-End and Back-End Technologies
+# Technologies
 Tools Used: HTML, CSS, JavaScript, OpenWeatherMapAPI
 
 # How it Works?
